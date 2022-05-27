@@ -37,13 +37,13 @@ pcp <- function(object) {
 	if (!is.element("precintcon.monthly", class(object)))
 		stop("Invalid data. Please, check your input object.")
 	
-	azimuth <- 360 * object$month / 12
+	azimuth <- 360 * object$month / 12 - 30
 	
 	rx <- aggregate(object$precipitation * sin(azimuth), by = list(object$year), FUN = sum)[2]
 	
 	ry <- aggregate(object$precipitation * cos(azimuth), by = list(object$year), FUN = sum)[2]
 	
-	pcp = atan(rx / ry) / 0.0174532925
+	pcp = atan(rx / ry)
 	
 	r <- data.frame(year = unique(object$year), pcp = pcp)
 	
