@@ -43,7 +43,7 @@ pcp <- function(object) {
 	
 	ry <- aggregate(object$precipitation * cos(azimuth), by = list(object$year), FUN = sum)[2]
 	
-	pcp = atan(rx / ry)
+	pcp = atan(rx / ry) / 0.0174532925
 	
 	r <- data.frame(year = unique(object$year), pcp = pcp)
 	
